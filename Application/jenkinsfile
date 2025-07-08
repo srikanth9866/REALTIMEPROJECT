@@ -6,7 +6,7 @@
         stage('Checkout Code') {
             steps {
                 echo 'scm git'
-                git branch: 'main', url: 'https://github.com/devopstraininghub/REALTIMEPROJECT.git'
+                git branch: 'main', url: 'https://github.com/srikanth9866/REALTIMEPROJECT.git'
             }
         }
     	
@@ -32,14 +32,14 @@
             steps{
                 script{
                     echo 'docker image build'
-		    sh 'cd Application && docker build -t srikanth9866/k8s1:${BUILD_NUMBER} .'
+		    sh 'cd Application && docker build -t srikanth0370/gitlab_project:${BUILD_NUMBER} .'
                 }
             }
         }
 		
        stage('docker image scan'){
         steps{
-            sh "trivy image srikanth9866/k8s1:${BUILD_NUMBER}"
+            sh "trivy image srikanth0370/gitlab_project:${BUILD_NUMBER}"
         }
     }		
          
@@ -51,7 +51,7 @@
                    sh 'docker login -u srikanth0370 -p ${dockerhub}'
 
               }
-                   sh 'docker push devopshubg333/k8s1:${BUILD_NUMBER}'
+                   sh 'docker push srikanth0370/gitlab_project:${BUILD_NUMBER}'
                 }
             }
         }
@@ -68,7 +68,7 @@
                     git config user.name "srikanth"
                     BUILD_NUMBER=${BUILD_NUMBER}
                   
-                    sed -i "s/k8s1:.*/k8s1:${BUILD_NUMBER}/g" Ansible/k8s_deployment.yaml
+                    sed -i "s/gitlab_project:.*/gitlab_project:${BUILD_NUMBER}/g" Ansible/k8s_deployment.yaml
                     git add .
                     git commit -m "Update deployment image tag to version ${BUILD_NUMBER}"
                     git push https://${GITHUB_TOKEN}@github.com/${GIT_USER_NAME}/${GIT_REPO_NAME} HEAD:main
