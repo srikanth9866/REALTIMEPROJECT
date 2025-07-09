@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: mc-app
-        image: devopshubg333/gitlab_project:19
+        image: devopshubg333/gitlab_project:20
         ports:
         - containerPort: 8080
 ---
