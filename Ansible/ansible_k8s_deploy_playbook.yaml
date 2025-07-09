@@ -1,6 +1,6 @@
 ---
 - name: Deploy Application into eks cluster 
-  hosts: appserver  # Replace with your target Kubernetes master host or group
+  hosts: all  # Replace with your target Kubernetes master host or group
   gather_facts: no  # No need to gather facts for this playbook
   become: yes 
   tasks:
